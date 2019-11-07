@@ -1,32 +1,45 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <el-container>
+      <el-aside>
+        <Aside></Aside>
+      </el-aside>
+      <el-container>
+        <el-header>
+          <Head></Head>
+        </el-header>
+        <el-main>
+          <router-view />
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
-
+<script>
+import Aside from "./components/aside";
+import Head from "./components/head";
+export default {
+  name: "APP",
+  components: {
+    Aside,
+    Head
+  }
+};
+</script>
 <style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.el-header {
+  line-height: 60px;
 }
 
-#nav {
-  padding: 30px;
+.el-aside {
+  height: 100vh;
+  background-color: black;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.el-main {
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body > .el-container {
+  margin-bottom: 40px;
 }
 </style>
