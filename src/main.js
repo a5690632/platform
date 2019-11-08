@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import './plugins/element'
 import './base/css/mixing.less';
-import "./api/conponent"
+import "./api/base"
 
 
 
