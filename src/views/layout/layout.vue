@@ -16,13 +16,16 @@
   </div>
 </template>
 <script>
-import Aside from "./components/layout/aside";
-import Head from "./components/layout/head";
+import Aside from "../../components/layout/aside.vue";
+import Head from "../../components/layout/head.vue";
 export default {
   name: "Layout",
   components: {
     Aside,
     Head
+  },
+  created() {
+    console.log(1);
   }
 };
 </script>

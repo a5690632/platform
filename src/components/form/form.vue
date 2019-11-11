@@ -2,23 +2,14 @@
   <div>
     <el-form
       ref="form"
-      :model="ruleForm"
+      :model="form"
       class="form"
       :label-width="formConfig.width"
       :rules="formConfig.rules"
     >
-      <el-form-item v-for="item in fromList" :key="item.key" :label="item.label">
-        <el-input
-          v-model="form[item.key]"
-          v-if="item.type==='input'"
-          :placeholder="item.placeholder"
-        ></el-input>
-
-        <el-select
-          v-model="form[item.key]"
-          :placeholder="item.placeholder"
-          v-if="item.type==='select'"
-        >
+      <el-form-item v-for="item in formList" :key="item.key" :label="item.label">
+        <el-input v-model="form[item.key]" v-if="item.type==='input'"></el-input>
+        <el-select v-model="form[item.key]" v-if="item.type==='select'">
           <el-option
             v-for="option in item.selectArray"
             :key="option.value"
@@ -30,7 +21,6 @@
         <el-date-picker
           v-if="item.type='date'"
           v-model="form[item.key]"
-          :type="item.dateType"
           align="right"
           unlink-panels
           range-separator="至"
@@ -41,12 +31,7 @@
           format="yyyy 年 MM 月 dd 日"
         ></el-date-picker>
 
-        <el-input
-          type="textarea"
-          v-model="form[item.key]"
-          v-if="item.type==='textarea'"
-          :placeholder="item.placeholder"
-        ></el-input>
+        <el-input type="textarea" v-model="form[item.key]" v-if="item.type==='textarea'"></el-input>
 
         <el-switch v-model="form[item.key]" v-if="item.type==='switch'"></el-switch>
 
@@ -79,14 +64,14 @@
 
 <script>
 export default {
-  name: "form",
+  name: "forms",
   props: {
     formConfig: {
       type: Object,
       required: true,
       default: () => {}
     },
-    fromList: {
+    formList: {
       type: Array,
       require: true,
       default: () => []
@@ -130,7 +115,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$refs[formName].validate(valid => {
+      this.$refs["form"].validate(valid => {
         if (valid) {
           alert("submit!");
         } else {

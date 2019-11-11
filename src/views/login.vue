@@ -3,7 +3,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  created() {
+    console.log("login");
+  }
+};
 </script>
 
 <style lang="less" scoped>

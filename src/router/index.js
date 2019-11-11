@@ -1,37 +1,44 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import APP from '../App.vue';
 Vue.use(VueRouter)
-const Table = () => import(/* webpackChunkName: "about" */ '../views/conpontents/table.vue')
-const Login = () => import(/* webpackChunkName: "login" */ '../views/conpontents/table.vue')
 
+
+
+const Login = () => import(/* webpackChunkName: "login" */ '../views/login.vue')
+const Layout = () => import(/* webpackChunkName: "login" */ '../views/layout/layout.vue')
+const Table = () => import(/* webpackChunkName: "login" */ '../views/conpontents/table.vue')
+const FormView = () => import(/* webpackChunkName: "login" */ '../views/conpontents/form.vue')
 const routes = [
+
   {
-    path: '/',
-    name: "index",
-    compontent: APP,
+    path: '/Login',
+    name: "login",
+    compontent: Login,
   },
   {
     path: '/layout',
     name: 'layout',
-    children: [{
-      path: '/layout/components/table',
-      name: 'table',
-      component: Table
-    }]
+    component: Layout,
+    children: [
+      {
+        path: '/layout/components/table',
+        name: 'table',
+        component: Table
+      },
+      {
+        path: '/layout/components/form',
+        name: 'formView',
+        component: FormView
+      }]
   },
-  {
-    path: '/login',
-    name: "login",
-    compontent: Login,
-  },
+
   // {
   //   path: '*',
   //   name: '404',
   //   // route level code-splitting
   //   // this generates a separate chunk (about.[hash].js) for this route
   //   // // which is lazy-loaded when the route is visited.
-  //   // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/404.vue')
   // }
 ]
 
