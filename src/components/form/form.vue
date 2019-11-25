@@ -7,11 +7,11 @@
       :label-width="formConfig.width"
       :rules="formConfig.rules"
     >
-      <el-form-item v-for="item in formList" :key="item.key" :label="item.label">
+      <el-form-item v-for="item in formList" :key="item.key" :label="item.label" :prop="item.key">
         <el-input v-model="form[item.key]" v-if="item.type==='input'"></el-input>
         <el-select v-model="form[item.key]" v-if="item.type==='select'">
           <el-option
-            v-for="option in item.selectArray"
+            v-for="option in item.config.option"
             :key="option.value"
             :label="option.label"
             :value="option.value"
@@ -19,7 +19,8 @@
         </el-select>
 
         <el-date-picker
-          v-if="item.type='date'"
+          v-if="item.type=='datetime'"
+          :type="item.config.type"
           v-model="form[item.key]"
           align="right"
           unlink-panels
@@ -27,14 +28,13 @@
           start-placeholder="开始日期"
           end-placeholder="结束日期"
           :picker-options="pickerOptions"
-          value-format="yyyy-MM-dd"
-          format="yyyy 年 MM 月 dd 日"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          format="yyyy-MM-dd HH:mm:ss"
         ></el-date-picker>
 
         <el-input type="textarea" v-model="form[item.key]" v-if="item.type==='textarea'"></el-input>
 
         <el-switch v-model="form[item.key]" v-if="item.type==='switch'"></el-switch>
-
         <el-radio-group v-model="form[item.key]" v-if="item.type==='radio'">
           <el-radio
             v-for="radio in item.radioArray"
@@ -43,15 +43,13 @@
             :value="radio.value"
           ></el-radio>
         </el-radio-group>
-
         <el-checkbox-group v-model="form[item.key]" v-if="item.type==='checkbox'">
-          <el-checkbox
-            v-for="checkbox in item.checkboxArray"
+          {{item.config.option}}
+          <!-- <el-checkbox
+            v-for="checkbox in item.config.option"
             :key="checkbox.value"
-            :label="checkbox.label"
-            :value="checkbox.value"
             :name="checkbox.value"
-          ></el-checkbox>
+          >{{checkbox.label}}</el-checkbox>-->
         </el-checkbox-group>
       </el-form-item>
       <el-form-item>
@@ -117,7 +115,7 @@ export default {
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.$emit("onsubmit", this.form);
         } else {
           console.log("error submit!!");
           return false;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Forms :form-config="formConfig" :form-list="formList"></Forms>
+    <Forms :form-config="formConfig" :form-list="formList" @onsubmit="submit"></Forms>
   </div>
 </template>
 
@@ -13,12 +13,72 @@ export default {
   },
   data() {
     return {
-      formConfig: {},
-      formList: []
+      formConfig: {
+        rules: {
+          name: [{ required: true, message: "请输入活动名称", trigger: "blur" }]
+        }
+      },
+      formList: [
+        {
+          key: "name",
+          type: "input",
+          label: "姓名："
+        },
+        {
+          key: "region",
+          type: "select",
+          label: "活动区域：",
+          config: {
+            option: [
+              {
+                label: "区域1",
+                value: "1"
+              },
+              {
+                label: "区域2",
+                value: "2"
+              }
+            ]
+          }
+        },
+        {
+          key: "datetime",
+          type: "datetime",
+          label: "时间：",
+          config: {
+            type: "datetimerange"
+          }
+        },
+        {
+          key: "delivery",
+          type: "switch",
+          label: "开关"
+        },
+        {
+          key: "checkbox",
+          type: "checkbox",
+          label: "多选",
+          config: {
+            option: [
+              {
+                label: "区域1",
+                value: "1"
+              },
+              {
+                label: "区域2",
+                value: "2"
+              }
+            ]
+          }
+        }
+      ]
     };
   },
-  created() {
-    console.log(1);
+  created() {},
+  methods: {
+    submit(from) {
+      console.log(from);
+    }
   }
 };
 </script>

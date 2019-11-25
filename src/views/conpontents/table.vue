@@ -26,7 +26,7 @@ export default {
   methods: {
     async getData() {
       let res = await this.$api.getTable();
-      console.log(res)
+      console.log(res);
     }
   }
 };

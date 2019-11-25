@@ -12,7 +12,8 @@
           <i class="el-icon-location"></i>
           <span slot="title">组件</span>
         </template>
-        <el-menu-item index="table">表格</el-menu-item>
+        <el-menu-item index="/layout/components/table">表格</el-menu-item>
+        <el-menu-item index="/layout/components/form">表单</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
