@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const Login = () => import(/* webpackChunkName: "login" */ '../views/login.vue')
 const Layout = () => import(/* webpackChunkName: "login" */ '../views/layout/layout.vue')
 const Table = () => import(/* webpackChunkName: "login" */ '../views/conpontents/table.vue')
-const FormView = () => import(/* webpackChunkName: "login" */ '../views/conpontents/form.vue')
+
 const routes = [
 
   {
@@ -25,11 +25,7 @@ const routes = [
         name: 'table',
         component: Table
       },
-      {
-        path: '/layout/components/form',
-        name: 'formView',
-        component: FormView
-      }]
+     
   },
 
   // {
