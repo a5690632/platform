@@ -4,16 +4,14 @@ Vue.use(VueRouter)
 
 
 
+
 const Login = () => import(/* webpackChunkName: "login" */ '../views/login.vue')
 const Layout = () => import(/* webpackChunkName: "login" */ '../views/layout/layout.vue')
 const Table = () => import(/* webpackChunkName: "login" */ '../views/conpontents/table.vue')
 
 const routes = [
-
   {
-    path: '/Login',
-    name: "login",
-    compontent: Login,
+    path: "/"
   },
   {
     path: '/layout',
@@ -24,9 +22,14 @@ const routes = [
         path: '/layout/components/table',
         name: 'table',
         component: Table
-      },
-     
+      }]
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
+
 
   // {
   //   path: '*',
