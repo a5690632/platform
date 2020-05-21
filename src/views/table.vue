@@ -4,8 +4,9 @@
 
 <script>
 	export default {
-		created() {
-			console.log(404);
+		async created() {
+			let res = await this.$ajax.common.getTable();
+			console.log(res);
 		}
 	};
 </script>
