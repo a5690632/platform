@@ -96,7 +96,7 @@
 					confirmPwd: this.form.confirmPwd,
 					id: this.$store.state.user.userInfo.id
 				};
-				let isfix = await this.$ajax.system.updatePassword(data);
+				await this.$ajax.system.updatePassword(data);
 				this.form.oldPwd = "";
 				this.form.newPwd = "";
 				this.form.confirmPwd = "";
