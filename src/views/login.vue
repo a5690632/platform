@@ -35,34 +35,6 @@
 					@keyup.enter.native="handleLogin"
 				/>
 			</el-form-item>
-			<!-- 手机号 -->
-			<div class="mmm">
-				<!-- <el-form-item prop="phoneCode" class="pr">
-          <el-input
-            ref="mobile"
-            v-model="ruleForm.mobile"
-            placeholder="手机号"
-            tabindex="2"
-            type="mobile"
-            auto-complete="on"
-            @keyup.enter.native="handleLogin"
-          />
-				</el-form-item>-->
-				<!-- 验证码 -->
-				<el-form-item prop="verificateCode" class="pr">
-					<el-input
-						ref="verificateCode"
-						v-model="ruleForm.verificateCode"
-						placeholder="验证码"
-						tabindex="2"
-						type="text"
-						auto-complete="on"
-						@keyup.enter.native="handleLogin"
-					/>
-				</el-form-item>
-				<el-button type="primary" round size="small" v-show="show" @click="getCode()">获取验证码</el-button>
-				<el-button type="primary" round size="small" v-show="!show" class="count">{{count}} s</el-button>
-			</div>
 
 			<el-button
 				:loading="loading"
@@ -81,8 +53,7 @@
 			return {
 				ruleForm: {
 					userName: "",
-					password: "",
-					verificateCode: ""
+					password: ""
 				},
 				loginRules: {
 					userName: [
@@ -98,27 +69,10 @@
 							trigger: "blur",
 							message: "请输入密码"
 						}
-					],
-					// mobile: [
-					//   {
-					//     required: true,
-					//     trigger: "blur",
-					//     message: "请输入手机号"
-					//   }
-					// ],
-					verificateCode: [
-						{
-							required: true,
-							trigger: "blur",
-							message: "请输入验证码"
-						}
 					]
 				},
 				loading: false,
-				redirect: undefined,
-				count: 60,
-				timer: null,
-				show: true
+				redirect: undefined
 			};
 		},
 		watch: {
@@ -133,7 +87,8 @@
 				immediate: true
 			}
 		},
-		mounted() {
+		async mounted() {
+			await this.$ajax.common.getTable();
 			if (this.ruleForm.userName === "") {
 				this.$refs.userName.focus();
 			} else if (this.ruleForm.password === "") {
@@ -169,30 +124,6 @@
 					}
 					return obj;
 				}, {});
-			},
-			// 获取短信验证码
-			async getCode() {
-				let data = {
-					userName: this.ruleForm.userName
-				};
-				//axios请求
-				await this.$ajax.system.verificateCode(data);
-				// console.log(this.form.phone);
-				// 验证码倒计时
-				if (!this.timer) {
-					this.count = 60;
-					this.show = false;
-					this.timer = setInterval(() => {
-						if (this.count > 0 && this.count <= 60) {
-							this.count--;
-							// console.log(this.count)
-						} else {
-							this.show = true;
-							clearInterval(this.timer);
-							this.timer = null;
-						}
-					}, 1000);
-				}
 			}
 		}
 	};
