@@ -88,7 +88,6 @@
 			}
 		},
 		async mounted() {
-			await this.$ajax.common.getTable();
 			if (this.ruleForm.userName === "") {
 				this.$refs.userName.focus();
 			} else if (this.ruleForm.password === "") {

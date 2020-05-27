@@ -6,13 +6,12 @@ import './plugins/element'
 import "./api/index"
 import "./permission.js"
 import '@/styles/index.scss' // global css
-import 'lib-flexible'
 import "./directive/index"
+import "amfe-flexible"
 Vue.config.productionTip = false
-
 new Vue({
   router,
   store,
   render: h => h(App),
- 
+
 }).$mount('#app')
